@@ -1,3 +1,12 @@
+library(shiny)
+require(shinydashboard)
+library(ggplot2)
+library(dplyr)
+library(plyr)
+library(FactoMineR)
+library(GGally)
+library(shinydashboard)
+
 function(input, output, session) {
 
   # Combine the selected variables into a new data frame
