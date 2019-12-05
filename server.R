@@ -5,7 +5,6 @@ library(dplyr)
 library(plyr)
 library(FactoMineR)
 library(GGally)
-library(shinydashboard)
 
 function(input, output, session) {
 
