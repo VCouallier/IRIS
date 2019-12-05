@@ -6,7 +6,7 @@
 
 #library(shiny)
 #require(shinydashboard)
-#library(ggplot2)
+library(ggplot2)
 #library(dplyr)
 #library(plyr)
 #library(FactoMineR)
