@@ -1,5 +1,5 @@
 pageWithSidebar(
-  headerPanel('Iris k-means clustering-GIT DELL'),
+  headerPanel('Iris k-means clustering'),
   sidebarPanel(
     selectInput('xcol', 'X Variable', names(iris)),
     selectInput('ycol', 'Y Variable', names(iris),
