@@ -1,5 +1,5 @@
 pageWithSidebar(
-  headerPanel('Iris k-means classif'),
+  headerPanel('Iris k-means classif- edit in GitHub'),
   sidebarPanel(
     selectInput('xcol', 'X Variable', names(iris)),
     selectInput('ycol', 'Y Variable', names(iris),
