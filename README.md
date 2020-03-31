@@ -1,4 +1,4 @@
-# Serveur ShinyR avec applications personnalisées
+# Modification du README
 
 - Copiez ce dépôt :
   - git clone plmlab.math.cnrs.fr/plmshift/shiny-custom.git
