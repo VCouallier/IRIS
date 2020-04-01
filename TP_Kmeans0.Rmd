@@ -1,0 +1,186 @@
+---
+title: "TP CENTRES MOBILES (K-MEANS)"
+#author: 'Nom'
+#date: 'date'
+output:
+  html_document:
+  #github_document:
+    df_print: paged
+  pdf_document: default
+editor_options: 
+  chunk_output_type: console
+---
+
+Définition des options générales de knitr.
+```{r setup}
+#knitr::opts_chunk$set(echo = T, message=F, eval=F, warning = F) # pour éditer le sujet
+knitr::opts_chunk$set(echo = T, message=F, eval=T, warning = F) # pour éditer la correction
+```
+
+# Récupération des données
+
+A partir du fichier texte, on vérifie d'abord que le fichier est bien accessible :
+```{r}
+dir()
+```
+Puis on l'importe : 
+```{r}
+X<-read.table(file="ind1234.txt",sep="\t",header=TRUE,dec=",",row.names=1)
+```
+
+Affichage pour vérification :
+```{r}
+X
+```
+
+# Calcul des distances 
+```{r}
+d=dist(X)
+d
+```
+
+
+# CENTRES MOBILES (K-MEANS) SUR L'EXERCICE DE TD
+Pour avoir une aide sur la fonction kmeans :
+```{r, eval=F}
+help(kmeans)
+```
+
+## Initialisation
+
+```{r}
+init<-X[1:2,] 
+```
+ind1 et ind2 sont les centres initiaux
+
+ou bien :
+```{r}
+init=X[c(1,2),]
+```
+
+Vérification :
+```{r}
+init
+```
+
+## Appel de la fonction kmeans
+avec ind1 et ind2 comme centres initiaux 
+
+```{r}
+result=kmeans(X,centers=init) 
+```
+
+```{r}
+result
+```
+
+## Affichage de la partition
+```{r}
+P2 <- result$cluster
+P2
+```
+
+## Inertie totale
+```{r}
+result$totss
+```
+
+## Inertie intra-classe W
+```{r}
+result$tot.withinss
+```
+
+## Inertie inter-classes B
+```{r}
+result$betweenss
+```
+
+## Pourcentage d'Inertie expliqué par la partition
+```{r}
+round((1-result$tot.withinss/result$totss)*100,2)
+```
+
+## Nombre d'individus dans chaque classe
+```{r}
+result$size
+```
+
+## Nombre d'itérations
+```{r}
+result$iter 
+```
+ 
+# CENTRES MOBILES (K-MEANS) SUR L'EXEMPLE DU COURS (PROTEIN)
+
+## Récupération et affichage des données
+
+```{r}
+library(PCAmixdata)
+data(protein)
+head(protein)
+```
+Les données décrivent la quantité de protéines consommée dans 9 types d’aliments dans 25 pays européens : 25 individus et 9 variables quantitatives.
+
+## Algorithme des centres mobiles pour obtenir une partition en 4 classes 
+On lance l'algo 5 fois avec initialisation aléatoire :
+
+```{r}
+res <- kmeans(protein,centers=4,nstart=5) 
+P4 <- res$cluster
+P4
+```
+
+## Pourcentage d'Inertie expliqué par la partition
+```{r}
+round((1-res$tot.withinss/res$totss)*100,2)
+```
+
+## ACP normée pour visualiser les classes et mieux les interpréter
+
+
+### Création d'une variable qualitative contenant la classe Ck d'appartenance de chaque individu donnée par P4 
+```{r}
+str(P4) #P4 contient pour l'instant des entiers
+P4<-as.factor(P4)
+P4
+str(P4) #P4 est maintenant une variable quali
+levels(P4)<-paste("C",1:4,sep="") 
+levels(P4) #la valeur k devient maintenant Ck
+```  
+
+### Affichage des contenus de chaque classe
+```{r}
+pays=row.names(protein)
+pays
+pays[which(P4=="C1")]
+pays[which(P4=="C2")]
+pays[which(P4=="C3")]
+pays[which(P4=="C4")]
+
+```
+
+
+### ACP normée en ajoutant la variable qualitative comme variable illustrative
+
+```{r}
+library(FactoMineR)
+ResACP=PCA(data.frame(P4,protein),scale.unit=T,quali.sup=1,ncp=5,graph=T)
+
+plot(ResACP, axes=c(1,2), choix="ind",habillage=1)#les individus sont maintenant colorés selon leur classe d'appartenance
+
+```
+
+### Si on veut afficher les données centrées-réduites 
+```{r}
+n<-nrow(protein)
+#on centre et on réduit les données avec la fonction scale et on appelle Z la matrice des données centrées-réduites :
+Z <- scale(protein, center=TRUE, scale=TRUE)*sqrt(n/(n-1)) 
+#NB : Dans la fonction scale, la réduction se fait en divisant par la racine carrée de la variance sans biais (avec 1/(n-1)), appelée "var" dans R. Pour avoir les résultas classiques de réduction il faut donc multiplier les valeurs par la racine de (n/(n-1))
+round(head(Z),2)
+
+#Vérifions que dans Z les colonnes sont de moyenne 1 et de variance 
+round(apply(Z,2,mean),4) #les moyennes sont nulles
+ectyp_n <- function(x) sqrt(var(x)*((length(x)-1)/length(x)))
+apply(Z,2,ectyp_n) # les écart-types sont égaux à 1
+
+```
