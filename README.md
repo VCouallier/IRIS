@@ -17,8 +17,8 @@ accessible :
 dir()
 ```
 
-    ## [1] "ind1234.txt"     "TP_Kmeans.html"  "TP_Kmeans.md"    "TP_Kmeans.Rmd"  
-    ## [5] "TP_Kmeans_files"
+    ## [1] "ind1234.txt"      "kmeans.Rproj"     "README.md"        "README1.rmd"     
+    ## [5] "README2.rmd"      "TP_Kmeans_files"  "TP_Kmeans0.Rmd"   "TP_Kmeans0_files"
 
 Puis on l’importe :
 
@@ -29,16 +29,15 @@ X<-read.table(file="ind1234.txt",sep="\t",header=TRUE,dec=",",row.names=1)
 Affichage pour vérification :
 
 ``` r
-X
+knitr::kable(X)
 ```
 
-<div data-pagedtable="false">
-
-<script data-pagedtable-source type="application/json">
-{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["var1"],"name":[1],"type":["int"],"align":["right"]},{"label":["var2"],"name":[2],"type":["int"],"align":["right"]}],"data":[{"1":"5","2":"4","_rn_":"ind1"},{"1":"4","2":"5","_rn_":"ind2"},{"1":"1","2":"-2","_rn_":"ind3"},{"1":"0","2":"-3","_rn_":"ind4"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
-  </script>
-
-</div>
+|      | var1 | var2 |
+| ---- | ---: | ---: |
+| ind1 |    5 |    4 |
+| ind2 |    4 |    5 |
+| ind3 |    1 |  \-2 |
+| ind4 |    0 |  \-3 |
 
 # Calcul des distances
 
@@ -77,16 +76,13 @@ init=X[c(1,2),]
 Vérification :
 
 ``` r
-init
+knitr::kable(init)
 ```
 
-<div data-pagedtable="false">
-
-<script data-pagedtable-source type="application/json">
-{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["var1"],"name":[1],"type":["int"],"align":["right"]},{"label":["var2"],"name":[2],"type":["int"],"align":["right"]}],"data":[{"1":"5","2":"4","_rn_":"ind1"},{"1":"4","2":"5","_rn_":"ind2"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
-  </script>
-
-</div>
+|      | var1 | var2 |
+| ---- | ---: | ---: |
+| ind1 |    5 |    4 |
+| ind2 |    4 |    5 |
 
 ## Appel de la fonction kmeans
 
@@ -185,20 +181,18 @@ result$iter
 ``` r
 library(PCAmixdata)
 data(protein)
-head(protein)
+knitr::kable(head(protein))
 ```
 
-<div data-pagedtable="false">
-
-<script data-pagedtable-source type="application/json">
-{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["Red.Meat"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["White.Meat"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["Eggs"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["Milk"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["Fish"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["Cereals"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["Starchy.Foods"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["Nuts"],"name":[8],"type":["dbl"],"align":["right"]},{"label":["Fruite.veg."],"name":[9],"type":["dbl"],"align":["right"]}],"data":[{"1":"10.1","2":"1.4","3":"0.5","4":"8.9","5":"0.2","6":"42.3","7":"0.6","8":"5.5","9":"1.7","_rn_":"Alban"},{"1":"8.9","2":"14.0","3":"4.3","4":"19.9","5":"2.1","6":"28.0","7":"3.6","8":"1.3","9":"4.3","_rn_":"Aust"},{"1":"13.5","2":"9.3","3":"4.1","4":"17.5","5":"4.5","6":"26.6","7":"5.7","8":"2.1","9":"4.0","_rn_":"Belg"},{"1":"7.8","2":"6.0","3":"1.6","4":"8.3","5":"1.2","6":"56.7","7":"1.1","8":"3.7","9":"4.2","_rn_":"Bulg"},{"1":"9.7","2":"11.4","3":"2.8","4":"12.5","5":"2.0","6":"34.3","7":"5.0","8":"1.1","9":"4.0","_rn_":"Czech"},{"1":"10.6","2":"10.8","3":"3.7","4":"25.0","5":"9.9","6":"21.9","7":"4.8","8":"0.7","9":"2.4","_rn_":"Den"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
-  </script>
-
-</div>
-
-Les données décrivent la quantité de protéines consommée dans 9 types
-d’aliments dans 25 pays européens : 25 individus et 9 variables
-quantitatives.
+|          |    Red.Meat |    White.Meat |     Eggs |     Milk |   Fish |     Cereals |   Starchy.Foods |   Nuts |                                                     Fruite.veg. |
+| -------- | ----------: | ------------: | -------: | -------: | -----: | ----------: | --------------: | -----: | --------------------------------------------------------------: |
+| Alban    |        10.1 |           1.4 |      0.5 |      8.9 |    0.2 |        42.3 |             0.6 |    5.5 |                                                             1.7 |
+| Aust     |         8.9 |          14.0 |      4.3 |     19.9 |    2.1 |        28.0 |             3.6 |    1.3 |                                                             4.3 |
+| Belg     |        13.5 |           9.3 |      4.1 |     17.5 |    4.5 |        26.6 |             5.7 |    2.1 |                                                             4.0 |
+| Bulg     |         7.8 |           6.0 |      1.6 |      8.3 |    1.2 |        56.7 |             1.1 |    3.7 |                                                             4.2 |
+| Czech    |         9.7 |          11.4 |      2.8 |     12.5 |    2.0 |        34.3 |             5.0 |    1.1 |                                                             4.0 |
+| Den      |        10.6 |          10.8 |      3.7 |     25.0 |    9.9 |        21.9 |             4.8 |    0.7 |                                                             2.4 |
+| Les donn | ées décrive | nt la quantit | é de pr | otéines | consom | mée dans 9 | types d’aliment | s dans | 25 pays européens : 25 individus et 9 variables quantitatives. |
 
 ## Algorithme des centres mobiles pour obtenir une partition en 4 classes
 
@@ -211,11 +205,11 @@ P4
 ```
 
     ##   Alban    Aust    Belg    Bulg   Czech     Den   E_Ger    Finl      Fr  Greece 
-    ##       4       2       2       3       4       2       1       2       2       4 
+    ##       3       1       1       3       1       2       1       2       1       3 
     ##    Hung Ireland   Italy  Nether     Nor     Pol    Port     Rom   Spain    Swed 
-    ##       4       2       4       2       2       4       1       3       1       2 
+    ##       3       2       1       2       2       1       4       3       4       2 
     ##   Switz      UK    USSR   W_Ger    Yugo 
-    ##       2       2       4       2       3
+    ##       2       2       3       2       3
 
 ## Pourcentage d’Inertie expliqué par la partition
 
@@ -223,7 +217,7 @@ P4
 round((1-res$tot.withinss/res$totss)*100,2)
 ```
 
-    ## [1] 75.8
+    ## [1] 72.33
 
 ## ACP normée pour visualiser les classes et mieux les interpréter
 
@@ -233,7 +227,7 @@ round((1-res$tot.withinss/res$totss)*100,2)
 str(P4) #P4 contient pour l'instant des entiers
 ```
 
-    ##  Named int [1:25] 4 2 2 3 4 2 1 2 2 4 ...
+    ##  Named int [1:25] 3 1 1 3 1 2 1 2 1 3 ...
     ##  - attr(*, "names")= chr [1:25] "Alban" "Aust" "Belg" "Bulg" ...
 
 ``` r
@@ -242,18 +236,18 @@ P4
 ```
 
     ##   Alban    Aust    Belg    Bulg   Czech     Den   E_Ger    Finl      Fr  Greece 
-    ##       4       2       2       3       4       2       1       2       2       4 
+    ##       3       1       1       3       1       2       1       2       1       3 
     ##    Hung Ireland   Italy  Nether     Nor     Pol    Port     Rom   Spain    Swed 
-    ##       4       2       4       2       2       4       1       3       1       2 
+    ##       3       2       1       2       2       1       4       3       4       2 
     ##   Switz      UK    USSR   W_Ger    Yugo 
-    ##       2       2       4       2       3 
+    ##       2       2       3       2       3 
     ## Levels: 1 2 3 4
 
 ``` r
 str(P4) #P4 est maintenant une variable quali
 ```
 
-    ##  Factor w/ 4 levels "1","2","3","4": 4 2 2 3 4 2 1 2 2 4 ...
+    ##  Factor w/ 4 levels "1","2","3","4": 3 1 1 3 1 2 1 2 1 3 ...
     ##  - attr(*, "names")= chr [1:25] "Alban" "Aust" "Belg" "Bulg" ...
 
 ``` r
@@ -279,26 +273,26 @@ pays
 pays[which(P4=="C1")]
 ```
 
-    ## [1] "E_Ger" "Port"  "Spain"
+    ## [1] "Aust"  "Belg"  "Czech" "E_Ger" "Fr"    "Italy" "Pol"
 
 ``` r
 pays[which(P4=="C2")]
 ```
 
-    ##  [1] "Aust"    "Belg"    "Den"     "Finl"    "Fr"      "Ireland" "Nether" 
-    ##  [8] "Nor"     "Swed"    "Switz"   "UK"      "W_Ger"
+    ## [1] "Den"     "Finl"    "Ireland" "Nether"  "Nor"     "Swed"    "Switz"  
+    ## [8] "UK"      "W_Ger"
 
 ``` r
 pays[which(P4=="C3")]
 ```
 
-    ## [1] "Bulg" "Rom"  "Yugo"
+    ## [1] "Alban"  "Bulg"   "Greece" "Hung"   "Rom"    "USSR"   "Yugo"
 
 ``` r
 pays[which(P4=="C4")]
 ```
 
-    ## [1] "Alban"  "Czech"  "Greece" "Hung"   "Italy"  "Pol"    "USSR"
+    ## [1] "Port"  "Spain"
 
 ### ACP normée en ajoutant la variable qualitative comme variable illustrative
 
@@ -307,13 +301,13 @@ library(FactoMineR)
 ResACP=PCA(data.frame(P4,protein),scale.unit=T,quali.sup=1,ncp=5,graph=T)
 ```
 
-![](TP_Kmeans_files/figure-gfm/unnamed-chunk-23-1.png)<!-- -->![](TP_Kmeans_files/figure-gfm/unnamed-chunk-23-2.png)<!-- -->
+![](TP_Kmeans0_files/figure-gfm/unnamed-chunk-23-1.png)<!-- -->![](TP_Kmeans0_files/figure-gfm/unnamed-chunk-23-2.png)<!-- -->
 
 ``` r
 plot(ResACP, axes=c(1,2), choix="ind",habillage=1)#les individus sont maintenant colorés selon leur classe d'appartenance
 ```
 
-![](TP_Kmeans_files/figure-gfm/unnamed-chunk-23-3.png)<!-- -->
+![](TP_Kmeans0_files/figure-gfm/unnamed-chunk-23-3.png)<!-- -->
 
 ### Si on veut afficher les données centrées-réduites
 
@@ -359,109 +353,3 @@ apply(Z,2,ectyp_n) # les écart-types sont égaux à 1
     ##             1             1             1             1             1 
     ##       Cereals Starchy.Foods          Nuts   Fruite.veg. 
     ##             1             1             1             1
-
----------------------------------------------------------------------------
-
-# Modification du README
-
-- Copiez ce dépôt :
-  - git clone plmlab.math.cnrs.fr/plmshift/shiny-custom.git
-  - ou bien en cliquant "Fork" sur la page d'accueil de ce dépôt
-- Dans le dossier ShinyApps, éditez les fichiers `ui.R` et `server.R`
-- Connectez-vous sur https://plmshift.math.cnrs.fr, créez une application Shiny R depuis le catalogue (en choisissant **Shiny R Application Server**)
-- Renseignez l'URL de votre dépôt shiny-custom
-  - si votre dépôt est public, l'URL sera de la forme : https://plmlab.math.cnrs.fr/votre_groupe/shiny-custom.git
-  - si vous souhaitez un dépôt privé, l'URL sera de la forme : [git@plmlab.math.cnrs.fr:votre_groupe/shiny-custom.git](git@plmlab.math.cnrs.fr:votre_groupe/shiny-custom.git)
-  - dans le cas d'un dépôt privé, vous devez utiliser une "clé SSH de déploiement" (voir ci-dessous) 
-- Patientez et ensuite connectez-vous sur l'URL de votre déploiement
-- Le dossier `/opt/app-root/src` est le point de montage d'un volume persistant contenant :
-  - le dossier `ShinyApps` : votre application 
-  - le dossier `R` vos packages supplémentaires (voir ci-dessous)
-
-# Cycle de vie de votre application
-
-- Editez les fichiers dans le dossier `ShinyApps` de votre dépôt shiny-custom, mettez à jour (git push) le dépôt git
-- Relancez la fabrication de votre image... :
-
-### En ligne de commande (avec la commande [oc](https://github.com/openshift/origin/releases/latest) - outil à installer)
-
-- Commencez par vous identifier en executant la commande de login suivante (accessible depuis l'interface web en cliquant sur votre identifient en haut à droite puis sur "Copy Login Command" :
-```
-oc login https://plmshift.math.cnrs.fr:443 --token=mon_token
-```
-où mon_token sera une suite de caractère à ne pas divulguée (permettant de ous identifier).
-
-- Executez les commandes suivantes (où mon projet sera à remplacer par le nom de votre projet au sein duquel se trouve votre appli shiny):
-```
-oc project mon_projet
-oc start-build bc/shiny-img
-```
-
-### Via la console Web
-
-- Allez sur la console de PLMShift, [sélectionnez votre projet](https://plmshift.math.cnrs.fr/console/projects)
-- Onglet Builds->Builds, cliquez sur **shiny-img**
-- Cliquez sur **Start Build**
-
-### Installation de packages R supplémentaires
-
-L'installation de packages se fera dans le dossier `/opt/app-root/src/R`.
-
-Il vous suffit de créer un fichier nommé `packages.r` à la racine de votre dépôt contenant les packages à installer (un nom par ligne), comme par exemple :
-
-```
-shinydashboard
-ggplot2
-dplyr
-```
-
-Vous pouvez aussi installer des packages en live. Ce n'est pas recommandé car la compilation peut ne pas aboutir si les processus dépassent la mémoire allouée au Pod :
-
-connectez-vous au Pod :
-```
-oc get pods
-oc rsh shiny-2-asce44 (selon ce que donne oc get pods)
-```
-au prompt du Shell :
-```
-sh-4.2$ R
-> install.packages('mon_package')
-> Ctrl D
-```
-
-# Récupération depuis PLMShift de votre dépôt privé, via une clé SSH de déploiement
-
-Si votre dépôt Shiny Custom est privé, PLMShift devra posséder un secret (ici une clé SSH) afin d'accéder à votre dépôt
-
-cf: https://docs.openshift.com/container-platform/3.11/dev_guide/builds/build_inputs.html#source-clone-secrets
-
-- Générer la clé :
-```
-ssh-keygen -C "openshift-source-builder/shiny@plmlab" -f shiny-at-plmlab -N ''
-```
-- Ajoutez la **clé publique** (contenu du fichier shiny-at-plmlab.pub) dans les préférences du dépôt mon_depot/shiny-custom : **Settings->Repository->Deploy Keys** 
-(il est possible de copier la clé publique dans le presse papier à l'aide de la commande suivante : `pbcopy < shiny-at-plmlab.pub`)
-
-### En ligne de commande (avec la commande [oc](https://github.com/openshift/origin/releases/latest))
-- Commencez par s'identifier dans oc si ce n'est pas déjà le cas (à l'aide de "Copy Login Command" - voir plus haut) :
-```
-oc login https://plmshift.math.cnrs.fr:443 --token=mon_token
-```
-- Ajout de la **clé privé** (contenu du fichier shiny-at-plmlab) dans PLMShift :
-```
-oc project mon_projet
-oc create secret generic shiny-at-plmlab --from-file=ssh-privatekey=shiny-at-plmlab --type=kubernetes.io/ssh-auth
-oc set build-secret --source bc/shiny-img shiny-at-plmlab
-oc start-build bc/shiny-img
-```
-La dernière commande ```oc start-build bc/shiny-img``` permet de relancer la fabrication de votre image, la première tentative ayant nécessairement échoué (car la clé SSH n'était pas encore déployée)
-
-### Via la console Web
-
-- Allez sur la console de PLMShift, [sélectionnez votre projet](https://plmshift.math.cnrs.fr/console/projects)
-- Onglet Resources->Secrets->Create Secret
-  - Pour la rubrique 'Authentication Type' sélectionnez 'SSH Key'
-  - Copiez/collez ou téléchargez votre clé privée SSH
-  - Pour la rubrique 'Service Account', sélectionnez 'builder'
-
-![Ajout clé SSH](img/secret-ssh-key.png)
