@@ -17,9 +17,8 @@ accessible :
 dir()
 ```
 
-    ##  [1] "ind1234.txt"      "kmeans.Rproj"     "README.md"        "README1.rmd"     
-    ##  [5] "README2.rmd"      "TP_Kmeans.md"     "TP_Kmeans_files"  "TP_Kmeans0.md"   
-    ##  [9] "TP_Kmeans0.Rmd"   "TP_Kmeans0_files"
+    ## [1] "ind1234.txt"      "kmeans.Rproj"     "README.md"        "README1.rmd"     
+    ## [5] "README2.rmd"      "TP_Kmeans_files"  "TP_Kmeans0.Rmd"   "TP_Kmeans0_files"
 
 Puis on l’importe :
 
@@ -206,11 +205,11 @@ P4
 ```
 
     ##   Alban    Aust    Belg    Bulg   Czech     Den   E_Ger    Finl      Fr  Greece 
-    ##       1       4       4       3       1       4       2       4       4       1 
+    ##       3       1       1       3       1       2       1       2       1       3 
     ##    Hung Ireland   Italy  Nether     Nor     Pol    Port     Rom   Spain    Swed 
-    ##       1       4       1       4       4       1       2       3       2       4 
+    ##       3       2       1       2       2       1       4       3       4       2 
     ##   Switz      UK    USSR   W_Ger    Yugo 
-    ##       4       4       1       4       3
+    ##       2       2       3       2       3
 
 ## Pourcentage d’Inertie expliqué par la partition
 
@@ -218,7 +217,7 @@ P4
 round((1-res$tot.withinss/res$totss)*100,2)
 ```
 
-    ## [1] 75.8
+    ## [1] 72.33
 
 ## ACP normée pour visualiser les classes et mieux les interpréter
 
@@ -228,7 +227,7 @@ round((1-res$tot.withinss/res$totss)*100,2)
 str(P4) #P4 contient pour l'instant des entiers
 ```
 
-    ##  Named int [1:25] 1 4 4 3 1 4 2 4 4 1 ...
+    ##  Named int [1:25] 3 1 1 3 1 2 1 2 1 3 ...
     ##  - attr(*, "names")= chr [1:25] "Alban" "Aust" "Belg" "Bulg" ...
 
 ``` r
@@ -237,18 +236,18 @@ P4
 ```
 
     ##   Alban    Aust    Belg    Bulg   Czech     Den   E_Ger    Finl      Fr  Greece 
-    ##       1       4       4       3       1       4       2       4       4       1 
+    ##       3       1       1       3       1       2       1       2       1       3 
     ##    Hung Ireland   Italy  Nether     Nor     Pol    Port     Rom   Spain    Swed 
-    ##       1       4       1       4       4       1       2       3       2       4 
+    ##       3       2       1       2       2       1       4       3       4       2 
     ##   Switz      UK    USSR   W_Ger    Yugo 
-    ##       4       4       1       4       3 
+    ##       2       2       3       2       3 
     ## Levels: 1 2 3 4
 
 ``` r
 str(P4) #P4 est maintenant une variable quali
 ```
 
-    ##  Factor w/ 4 levels "1","2","3","4": 1 4 4 3 1 4 2 4 4 1 ...
+    ##  Factor w/ 4 levels "1","2","3","4": 3 1 1 3 1 2 1 2 1 3 ...
     ##  - attr(*, "names")= chr [1:25] "Alban" "Aust" "Belg" "Bulg" ...
 
 ``` r
@@ -274,26 +273,26 @@ pays
 pays[which(P4=="C1")]
 ```
 
-    ## [1] "Alban"  "Czech"  "Greece" "Hung"   "Italy"  "Pol"    "USSR"
+    ## [1] "Aust"  "Belg"  "Czech" "E_Ger" "Fr"    "Italy" "Pol"
 
 ``` r
 pays[which(P4=="C2")]
 ```
 
-    ## [1] "E_Ger" "Port"  "Spain"
+    ## [1] "Den"     "Finl"    "Ireland" "Nether"  "Nor"     "Swed"    "Switz"  
+    ## [8] "UK"      "W_Ger"
 
 ``` r
 pays[which(P4=="C3")]
 ```
 
-    ## [1] "Bulg" "Rom"  "Yugo"
+    ## [1] "Alban"  "Bulg"   "Greece" "Hung"   "Rom"    "USSR"   "Yugo"
 
 ``` r
 pays[which(P4=="C4")]
 ```
 
-    ##  [1] "Aust"    "Belg"    "Den"     "Finl"    "Fr"      "Ireland" "Nether" 
-    ##  [8] "Nor"     "Swed"    "Switz"   "UK"      "W_Ger"
+    ## [1] "Port"  "Spain"
 
 ### ACP normée en ajoutant la variable qualitative comme variable illustrative
 

@@ -3,8 +3,8 @@ title: "TP CENTRES MOBILES (K-MEANS)"
 #author: 'Nom'
 #date: 'date'
 output:
-  html_document:
-  #github_document:
+  #html_document:
+  github_document:
     df_print: paged
   pdf_document: default
 editor_options: 
@@ -30,7 +30,7 @@ X<-read.table(file="ind1234.txt",sep="\t",header=TRUE,dec=",",row.names=1)
 
 Affichage pour vérification :
 ```{r}
-X
+knitr::kable(X)
 ```
 
 # Calcul des distances 
@@ -60,7 +60,7 @@ init=X[c(1,2),]
 
 Vérification :
 ```{r}
-init
+knitr::kable(init)
 ```
 
 ## Appel de la fonction kmeans
@@ -117,7 +117,7 @@ result$iter
 ```{r}
 library(PCAmixdata)
 data(protein)
-head(protein)
+knitr::kable(head(protein))
 ```
 Les données décrivent la quantité de protéines consommée dans 9 types d’aliments dans 25 pays européens : 25 individus et 9 variables quantitatives.
 
